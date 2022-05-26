@@ -12,7 +12,7 @@ services:
       - /usr/app/node_modules
 
   db:
-    image: postgres:alpine
+    image: postgres
     container_name: database
     restart: always
     ports:
@@ -25,3 +25,15 @@ services:
       - app
     volumes:
       - .:/usr/db
+
+  db-admin:
+    image: dpage/pgadmin4
+    container_name: database-admin
+    restart: always
+    ports:
+      - "1000:80"
+    depends_on:
+      - db
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${DB_ADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${DB_PASSWD}

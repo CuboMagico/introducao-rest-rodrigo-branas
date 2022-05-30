@@ -7,23 +7,22 @@ router.get("/posts", async (req, res) => {
     res.json(posts)
 })
 
-router.get("/posts/:id", async () => {
 
+router.post("/posts", async (req, res) => {
+    const post = await postService.savePost(req.body)
+    res.json(post)
 })
 
 
-router.post("/posts", async () => {
-
+router.put("/post/:id", async (req, res) => {
+    await postService.updatePost(req.params.id, req.body)
+    res.end()
 })
 
 
-router.put("/posts/:id", async () => {
-
-})
-
-
-router.delete("/posts/:id", async () => {
-
+router.delete("/post/:id", async (req, res) => {
+    await postService.deletePost(req.params.id)
+    res.end()
 })
 
 module.exports = router

@@ -4,6 +4,10 @@ exports.getPost = (id) => {
     return database.oneOrNone("SELECT * FROM blog.posts WHERE id = $1", [id])
 }
 
+exports.getPostByTitle = (title) => {
+    return database.oneOrNone("SELECT * FROM blog.posts WHERE title = $1", [title])
+}
+
 exports.getPosts = () => {
     return database.query("SELECT * FROM blog.posts")
 }
